@@ -294,16 +294,6 @@
                     </view>
                     <connections>
                         <outlet property="displayLabel" destination="Rfu-iG-JwW" id="ptF-er-vVV"/>
-                        <outlet property="eight" destination="mop-nX-dzf" id="eFH-7B-0AW"/>
-                        <outlet property="five" destination="xH5-nR-KuL" id="cOE-dJ-ree"/>
-                        <outlet property="four" destination="GYy-wC-Qmf" id="7bv-HV-l3C"/>
-                        <outlet property="nine" destination="eKN-iY-tQc" id="fyv-6L-XkR"/>
-                        <outlet property="one" destination="hwu-pd-OJ5" id="gLL-vF-IQt"/>
-                        <outlet property="seven" destination="rUc-S0-43V" id="huo-1A-MBm"/>
-                        <outlet property="six" destination="a1j-PL-BSz" id="8Ex-SN-e1D"/>
-                        <outlet property="three" destination="QIY-Od-gMm" id="hLG-1K-GNb"/>
-                        <outlet property="two" destination="gF1-tm-6Ms" id="7yV-sw-QyN"/>
-                        <outlet property="zero" destination="O26-V4-QSi" id="Bpw-Pm-a4c"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
