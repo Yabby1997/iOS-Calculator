@@ -16,90 +16,101 @@ class ViewController: UIViewController {
     }
     
     @IBOutlet var displayLabel: UILabel!
+    
+    var initialInput = true
+    var zeroAddable = false
     var operatorAddable = true
+    var dotAddable = true
+
+    var operand = 0.0
+    var operatorToken = ""
+    
+    func inputInitiate(){
+        initialInput = true
+        operatorAddable = false
+        dotAddable = true
+        zeroAddable = false
+    }
     
     @IBAction func allClear(_ sender : Any){
-        displayLabel.text = ""
-        operatorAddable = true
+        displayLabel.text = "0"
+        operatorToken = ""
+        operand = 0
+        inputInitiate()
     }
     
-    @IBAction func oneTapped(_ sender : Any){
-        displayLabel.text! += "1"
+    @IBAction func numTapped(_ sender : UIButton){
+        if initialInput{
+            displayLabel.text! = sender.currentTitle!
+        }
+        else{
+            displayLabel.text! += sender.currentTitle!
+        }
+        initialInput = false
         operatorAddable = true
-    }
-    
-    @IBAction func twoTapped(_ seender : Any){
-        displayLabel.text! += "2"
-        operatorAddable = true
-    }
-    
-    @IBAction func threeTapped(_ seender : Any){
-        displayLabel.text! += "3"
-        operatorAddable = true
-    }
-    
-    @IBAction func fourTapped(_ seender : Any){
-        displayLabel.text! += "4"
-        operatorAddable = true
-    }
-    
-    @IBAction func fiveTapped(_ seender : Any){
-        displayLabel.text! += "5"
-        operatorAddable = true
-    }
-    
-    @IBAction func sixTapped(_ seender : Any){
-        displayLabel.text! += "6"
-        operatorAddable = true
-    }
-    
-    @IBAction func sevenTapped(_ seender : Any){
-        displayLabel.text! += "7"
-        operatorAddable = true
-    }
-    
-    @IBAction func eightTapped(_ seender : Any){
-        displayLabel.text! += "8"
-        operatorAddable = true
-    }
-    
-    @IBAction func nineTapped(_ seender : Any){
-        displayLabel.text! += "9"
-        operatorAddable = true
+        zeroAddable = true
     }
     
     @IBAction func zeroTapped(_ seender : Any){
-        displayLabel.text! += "0"
-        operatorAddable = true
-    }
-    
-    @IBAction func plusTapped(_ sender : Any){
-        if operatorAddable && displayLabel.text! != ""{
-            displayLabel.text! += "+"
-            operatorAddable = false
+        if zeroAddable{
+            displayLabel.text! += "0"
         }
     }
     
-    @IBAction func minusTapped(_ sender : Any){
-        if operatorAddable && displayLabel.text! != ""{
-            displayLabel.text! += "-"
-            operatorAddable = false
+    
+    @IBAction func dotTapped(_ sender : Any){
+        if dotAddable{
+            if initialInput{
+                displayLabel.text! = "0"
+            }
+            displayLabel.text! += "."
+            initialInput = false
+            dotAddable = false
+            zeroAddable = true
         }
     }
     
-    @IBAction func multiplyTapped(_ sender : Any){
-        if operatorAddable && displayLabel.text! != ""{
-            displayLabel.text! += "x"
-            operatorAddable = false
+    @IBAction func operatorTapped(_ sender : UIButton){
+        if operatorAddable{
+            let currentInput = Double(displayLabel.text!)!
+            if operatorToken == ""{
+                operatorToken = sender.currentTitle!
+                if operand == 0{
+                    operand = currentInput
+                }
+            }
+            else{
+                switch operatorToken{
+                case "÷":
+                    operand /= currentInput
+                    break
+                
+                case "×":
+                    operand *= currentInput
+                    break
+                
+                case "-":
+                    operand -= currentInput
+                    break
+                
+                case "+":
+                    operand += currentInput
+                    break
+                    
+                default:
+                    break
+                }
+            }
+            inputInitiate()
+            if sender.currentTitle! == "="{
+                operatorToken = ""
+                operatorAddable = true
+            }
+            else{
+                operatorToken = sender.currentTitle!
+            }
+            displayLabel.text! = String(operand)
+            print(operand)
         }
     }
-    
-    @IBAction func divideTapped(_ sender : Any){
-        if operatorAddable && displayLabel.text! != ""{
-            displayLabel.text! += "/"
-            operatorAddable = false
-        }
-    }
-    
 }
-
